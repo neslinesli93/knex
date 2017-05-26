@@ -58,7 +58,9 @@ assign(ColumnCompiler_MSSQL.prototype, {
 
   longtext: 'nvarchar(max)',
 
-  enu: 'nvarchar(100)',
+  enu(allowed) {
+    return `CHECK (${this.formatter.wrap(this.args[0])} IN ('${allowed.join("', '")}'))`
+  },
 
   uuid: 'uniqueidentifier',
 
